@@ -9,6 +9,7 @@ import CursorEffect from "@/components/ui/cursor-effect";
 import InteractiveBackground from "@/components/ui/interactive-background";
 import SmoothScrolling from "@/components/common/smooth-scrolling";
 import FloatingContactButton from "@/components/common/floating-contact-button";
+import ScrollProgress from "@/components/ui/scroll-progress";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-black transition-colors duration-300`}
       >
+        <ScrollProgress />
         <SmoothScrolling />
         <InteractiveBackground />
         <CursorEffect />
