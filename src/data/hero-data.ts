@@ -13,7 +13,7 @@ export const socialLinks = [
     href: "https://github.com/mohitxcodes",
     label: "GitHub",
     color: "hover:text-gray-900 dark:hover:text-white",
-    hoverText: "#111827", // near text-gray-900
+    hoverText: "#ffffff", // near text-gray-900
     hoverBorder: "rgba(17,24,39,0.4)",
     hoverBg: "rgba(17,24,39,0.05)",
     themeHover:

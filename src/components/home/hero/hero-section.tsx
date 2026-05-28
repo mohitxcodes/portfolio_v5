@@ -21,10 +21,33 @@ const allSkills = skillCategories.flatMap(category =>
 
 export default function HeroSection() {
     const [loading, setLoading] = useState(true);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isImageLoading, setIsImageLoading] = useState(false);
+
+    // Avatar images - replace these with your actual image paths
+    const avatarImages = [
+        '/profile/mohit03.jpg', // Replace with third image
+        '/profile/mohit-dp.jpeg',
+        '/profile/mohit02.jpg', // Replace with second image
+        '/profile/mohit.jpeg'
+    ];
 
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 800);
         return () => clearTimeout(timer);
+    }, []);
+
+    // Cycle through images every 3 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsImageLoading(true);
+            setTimeout(() => {
+                setCurrentImageIndex((prev) => (prev + 1) % avatarImages.length);
+                setTimeout(() => setIsImageLoading(false), 300);
+            }, 300);
+        }, 3000);
+
+        return () => clearInterval(interval);
     }, []);
 
     if (loading) return <HeroFallback />;
@@ -60,12 +83,10 @@ export default function HeroSection() {
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
-                className="relative overflow-hidden min-h-[85vh] flex flex-col justify-center pt-12 pb-4"
+                className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center "
             >
-                {/* Glowing Background Blob */}
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[20rem] md:w-[35rem] h-[20rem] md:h-[35rem] bg-light-accent/10 dark:bg-dark-accent/10 rounded-full blur-[100px] pointer-events-none animate-pulse" />
 
-                <div className="relative z-10 flex flex-col items-center justify-center gap-8 px-4 w-full text-center max-w-5xl mx-auto">
+                <div className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 w-full text-center max-w-5xl mx-auto">
 
                     {/* Main Headline */}
                     <motion.div
@@ -77,9 +98,23 @@ export default function HeroSection() {
                             <span className="text-gray-500 dark:text-gray-400 font-medium">Hey, I&apos;m</span>
                             <motion.div
                                 whileHover={{ scale: 1.1, rotate: 5 }}
-                                className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-20 rounded-full overflow-hidden border-2 sm:border-4 border-gray-200 dark:border-white/10 shadow-xl"
+                                className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-18 rounded-full overflow-hidden border-2 sm:border-4 border-gray-200 dark:border-white/10 shadow-xl"
                             >
-                                <Image src="/profile/mohit-dp.jpeg" alt="Mohit Kumar" fill className="object-cover" />
+                                <motion.div
+                                    key={currentImageIndex}
+                                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                                    className="w-full h-full"
+                                >
+                                    <Image
+                                        src={avatarImages[currentImageIndex]}
+                                        alt="Mohit Kumar"
+                                        fill
+                                        className="object-cover"
+                                        priority
+                                    />
+                                </motion.div>
                             </motion.div>
                             <span>Mohit</span>
                         </div>
@@ -109,16 +144,18 @@ export default function HeroSection() {
                     <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-6 mt-4">
                         <div className="flex items-center gap-5">
                             {socialLinks.map((social, index) => (
-                                <a
+                                <motion.a
                                     key={index}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-500 dark:text-gray-400 hover:text-light-accent dark:hover:text-white transition-colors duration-300"
+                                    whileHover={{ scale: 1.2, color: social.hoverText }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="text-gray-500 dark:text-gray-400 transition-all "
                                     aria-label={social.label}
                                 >
                                     <social.icon className="w-6 h-6" />
-                                </a>
+                                </motion.a>
                             ))}
                         </div>
                         <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
@@ -129,18 +166,36 @@ export default function HeroSection() {
                             Let&apos;s Talk <RiArrowRightLine />
                         </Link>
                         <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
-                        <Link
-                            href="/exp/resume.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-2.5 bg-gray-900 hover:bg-gray-800 dark:bg-white/10 dark:hover:bg-white/20 text-white font-medium rounded-full transition-all duration-300 shadow-md"
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            <FiFileText className="w-4 h-4" /> Resume
-                        </Link>
+                            <Link
+                                href="/exp/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative px-5 py-2 text-sm font-medium 
+                                    bg-gray-200/50 dark:bg-gray-800/50 text-gray-900 dark:text-white
+                                    rounded-xl border border-gray-200 dark:border-gray-700
+                                    overflow-hidden
+                                    shadow-lg hover:shadow-xl
+                                    transition-all duration-300
+                                    flex items-center gap-2"
+                            >
+                                <span className="absolute inset-0 w-full py-16 px-24 h-full bg-white dark:bg-white transition-transform duration-750 ease-out transform translate-y-1/3 -rotate-12 -translate-x-full group-hover:translate-x-0 group-hover:translate-y-0 origin-bottom-left z-0" />
+                                <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-900">
+                                    <FiFileText className="w-4 h-4" />
+                                    <span>Resume</span>
+                                    <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300">
+                                        →
+                                    </span>
+                                </span>
+                            </Link>
+                        </motion.div>
                     </motion.div>
 
                     {/* Marquee Section */}
-                    <motion.div variants={itemVariants} className="w-full mt-16 sm:mt-24 flex flex-col items-center">
+                    <motion.div variants={itemVariants} className="w-full mt-8 sm:mt-12 flex flex-col items-center">
                         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent relative mb-10">
                             <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-white dark:bg-[#0f1115] px-4 text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2">
                                 Scroll down
