@@ -53,27 +53,30 @@ export default function ExperiencePage() {
 
                         {/* Tabs - Only show on desktop */}
                         {!isMobile && (
-                            <div className="flex gap-4">
-                                <button
-                                    onClick={() => setActiveTab('experience')}
-                                    className={`px-4 py-1 rounded-sm text-sm font-medium transition-all duration-300
-                                        ${activeTab === 'experience'
-                                            ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
-                                >
-                                    <FaBriefcase className="inline-block mr-2" />
-                                    Experience
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab('certifications')}
-                                    className={`px-4 py-1 rounded-sm text-sm font-medium transition-all duration-300
-                                        ${activeTab === 'certifications'
-                                            ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
-                                >
-                                    <FaCertificate className="inline-block mr-2" />
-                                    Certifications
-                                </button>
+                            <div className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm relative">
+                                {[
+                                    { id: 'experience', label: 'Experience', icon: FaBriefcase },
+                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate }
+                                ].map((tab) => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`relative flex items-center px-4 py-1.5 rounded-full cursor-pointer text-xs font-semibold transition-colors duration-300 z-10
+                                            ${activeTab === tab.id
+                                                ? 'text-gray-900'
+                                                : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10'}`}
+                                    >
+                                        {activeTab === tab.id && (
+                                            <motion.div
+                                                layoutId="activeExpTabIndicator"
+                                                className="absolute inset-0 bg-white dark:bg-white rounded-full shadow-sm -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                        <tab.icon className={`inline-block mr-1.5 relative z-10 ${activeTab === tab.id ? 'text-gray-900' : ''}`} />
+                                        <span className="relative z-10">{tab.label}</span>
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
@@ -89,27 +92,32 @@ export default function ExperiencePage() {
 
                     {/* Tabs - Show below description on mobile */}
                     {isMobile && (
-                        <div className="flex gap-4 w-full justify-center mt-6">
-                            <button
-                                onClick={() => setActiveTab('experience')}
-                                className={`px-4 py-1 rounded-sm text-sm font-medium transition-all duration-300
-                                    ${activeTab === 'experience'
-                                        ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
-                            >
-                                <FaBriefcase className="inline-block mr-2" />
-                                Experience
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('certifications')}
-                                className={`px-4 py-1 rounded-sm text-sm font-medium transition-all duration-300
-                                    ${activeTab === 'certifications'
-                                        ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
-                            >
-                                <FaCertificate className="inline-block mr-2" />
-                                Certifications
-                            </button>
+                        <div className="flex gap-4 w-full justify-start mt-6 pb-2 overflow-x-auto scrollbar-hide">
+                            <div className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm relative w-max">
+                                {[
+                                    { id: 'experience', label: 'Experience', icon: FaBriefcase },
+                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate }
+                                ].map((tab) => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`relative flex items-center px-4 py-1.5 rounded-full cursor-pointer text-xs font-semibold transition-colors duration-300 whitespace-nowrap flex-shrink-0 z-10
+                                            ${activeTab === tab.id
+                                                ? 'text-gray-900'
+                                                : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10'}`}
+                                    >
+                                        {activeTab === tab.id && (
+                                            <motion.div
+                                                layoutId="activeExpTabIndicatorMobile"
+                                                className="absolute inset-0 bg-white dark:bg-white rounded-full shadow-sm -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                        <tab.icon className={`inline-block mr-1.5 relative z-10 ${activeTab === tab.id ? 'text-gray-900' : ''}`} />
+                                        <span className="relative z-10">{tab.label}</span>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </motion.div>

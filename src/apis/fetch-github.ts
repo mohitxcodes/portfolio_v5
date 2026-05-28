@@ -14,8 +14,20 @@ export async function fetchGitHubContributions(
   }
 
   const targetYear = year || new Date().getFullYear();
-  const from = `${targetYear}-01-01T00:00:00Z`;
-  const to = `${targetYear}-12-31T23:59:59Z`;
+  
+  let from: string;
+  let to: string;
+
+  if (year) {
+    from = `${targetYear}-01-01T00:00:00Z`;
+    to = `${targetYear}-12-31T23:59:59Z`;
+  } else {
+    const toDate = new Date();
+    const fromDate = new Date();
+    fromDate.setFullYear(toDate.getFullYear() - 1);
+    from = fromDate.toISOString();
+    to = toDate.toISOString();
+  }
 
   const headers = {
     'Content-Type': 'application/json',

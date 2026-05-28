@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaGithub, FaExternalLinkAlt, FaCalendarAlt, FaArrowRight, FaGlobe, FaBrain, FaMobile } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { ProjectCardProps } from '@/types/projects-types'
 
@@ -9,142 +9,111 @@ import { ProjectCardProps } from '@/types/projects-types'
 export default function ProjectCard({ project, index, getProjectTypeIcon }: ProjectCardProps) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group bg-white dark:bg-gray-800/50 rounded-2xl overflow-hidden
-                border border-gray-200 dark:border-gray-700/50
-                shadow-lg hover:shadow-2xl transition-all duration-300
-                hover:scale-[1.02] transform w-full"
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            className="group relative h-[10rem] sm:h-[12rem] md:h-[14rem] w-full rounded-2xl overflow-hidden cursor-pointer isolate shadow-md hover:shadow-xl transition-shadow duration-500"
         >
-            {/* Project Image */}
-            <div className="relative h-48 sm:h-56 md:h-64 w-full overflow-hidden">
-                {project.images && project.images.length > 0 && (
-                    <Image
-                        src={project.images[0]}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500
-                            group-hover:scale-110"
-                    />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* Background Image */}
+            {project.images && project.images.length > 0 && (
+                <Image
+                    src={project.images[0]}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 z-0"
+                />
+            )}
 
-                <div className="absolute top-4 right-4 flex gap-2">
-                    {getProjectTypeIcon(project.projectType)}
-                </div>
+            {/* Gradient Overlays */}
+            {/* Permanent subtle gradient for readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500" />
+
+            {/* Hover gradient: Darkens the bottom significantly for better readability on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+
+            {/* Top Right Icon */}
+            <div className="absolute top-3 right-3 z-20 bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/10">
+                {getProjectTypeIcon(project.projectType)}
             </div>
 
-            {/* Project Content */}
-            <div className="p-4 sm:p-5 md:p-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4">
-                    <div>
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">
-                            {project.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                            {project.subtitle}
-                        </p>
-                    </div>
-                    <div className="flex gap-2 self-end sm:self-auto">
-                        {project.githubUrl && (
-                            <a
-                                href={project.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-1.5 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700
-                                    text-gray-600 dark:text-gray-400
-                                    hover:bg-gray-200 dark:hover:bg-gray-600
-                                    transition-all duration-300"
-                            >
-                                <FaGithub className="text-lg sm:text-xl" />
-                            </a>
-                        )}
-                        {project.liveUrl && (
-                            <a
-                                href={project.liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-1.5 sm:p-2 rounded-lg bg-blue-100 dark:bg-blue-900/50
-                                    text-blue-600 dark:text-blue-400
-                                    hover:bg-blue-200 dark:hover:bg-blue-800/50
-                                    transition-all duration-300"
-                            >
-                                <FaExternalLinkAlt className="text-lg sm:text-xl" />
-                            </a>
-                        )}
-                    </div>
+            {/* Content Container (Bottom Aligned) */}
+            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col justify-end pointer-events-none">
+
+                {/* Title (Always Visible) */}
+                <div className="mb-2">
+                    <h3 className="text-xl sm:text-lg font-bold text-white tracking-tight mb-0.5 drop-shadow-md line-clamp-1">
+                        {project.title}
+                    </h3>
                 </div>
 
-                {/* Project Meta */}
-                <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    {project.role && (
-                        <div className="flex items-center gap-1">
-                            {project.projectType === 'website' ? (
-                                <span className="flex items-center gap-1">
-                                    <FaGlobe className="" />
-                                    <span className="hidden xs:inline">Web Application</span>
-                                    <span className="xs:hidden">Web</span>
+                {/* Rest of Content (Hidden by default, slides up and fades in on hover) */}
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-auto">
+                    <div className="overflow-hidden">
+                        {/* Tech Stack */}
+                        <div className="flex flex-wrap gap-1.5 mb-3 pt-2">
+                            {project.technologies.slice(0, 3).map((tech, idx) => (
+                                <span
+                                    key={idx}
+                                    className="px-2 py-0.5 text-[10px] font-semibold
+                                        bg-white/20 backdrop-blur-sm text-white
+                                        rounded-full border border-white/20"
+                                >
+                                    {tech}
                                 </span>
-                            ) : project.projectType === 'ai' ? (
-                                <span className="flex items-center gap-1">
-                                    <FaBrain className="" />
-                                    <span>AI/ML</span>
+                            ))}
+                            {project.technologies.length > 3 && (
+                                <span className="px-2 py-0.5 text-[10px] font-semibold
+                                    bg-white/10 backdrop-blur-sm text-gray-300
+                                    rounded-full border border-white/10"
+                                >
+                                    +{project.technologies.length - 3}
                                 </span>
-                            ) : project.projectType === 'app' ? (
-                                <span className="flex items-center gap-1">
-                                    <FaMobile className="" />
-                                    <span className="hidden xs:inline">Mobile Application</span>
-                                    <span className="xs:hidden">Mobile</span>
-                                </span>
-                            ) : (
-                                <span>{project.role}</span>
                             )}
                         </div>
-                    )}
-                    {project.duration && (
-                        <div className="flex items-center gap-1">
-                            <FaCalendarAlt className="" />
-                            <span>{project.duration}</span>
+
+                        {/* Action Buttons */}
+                        <div className="flex items-center justify-between gap-3">
+                            {project.liveUrl ? (
+                                <a
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 py-1.5 px-3 rounded-lg text-center font-bold
+                                        bg-white/90 text-gray-900 hover:bg-white active:scale-95
+                                        transition-all duration-300 text-xs shadow-md flex items-center justify-center gap-2"
+                                >
+                                    Live Preview
+                                    <FaExternalLinkAlt className="text-[10px]" />
+                                </a>
+                            ) : (
+                                <Link
+                                    href={`/projects/${project.id}`}
+                                    className="flex-1 py-1.5 px-3 rounded-lg text-center font-bold
+                                        bg-white/90 text-gray-900 hover:bg-white active:scale-95
+                                        transition-all duration-300 text-xs shadow-md"
+                                >
+                                    View Details
+                                </Link>
+                            )}
+
+                            {project.githubUrl && (
+                                <a
+                                    href={project.githubUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-1.5 px-2.5 rounded-lg bg-white/20 hover:bg-white/30 text-white backdrop-blur-md border border-white/20 transition-all duration-300 active:scale-95 flex items-center justify-center"
+                                >
+                                    <FaGithub className="text-sm" />
+                                </a>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
-
-                <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 line-clamp-2">
-                    {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-                    {project.technologies.map((tech, idx) => (
-                        <span
-                            key={idx}
-                            className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium
-                                bg-gray-100 dark:bg-gray-700/50
-                                text-gray-700 dark:text-gray-300
-                                rounded-md border border-gray-200 dark:border-gray-600/50
-                                hover:scale-105 transform transition-all duration-300"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                </div>
-
-                {/* View Details Button */}
-                <Link
-                    href={`/projects/${project.id}`}
-                    className="flex items-center justify-center w-full py-1.5 sm:py-2 px-3 sm:px-4 rounded-sm text-center font-medium
-                        bg-gray-100 text-xs sm:text-sm dark:bg-gray-700/50 text-gray-800 dark:text-white
-                        border border-gray-200 dark:border-gray-600/50
-                        hover:bg-gray-200 dark:hover:bg-gray-600/50
-                        transition-all duration-300"
-                >
-                    View Details
-                    <FaArrowRight className="ml-2 size-3" />
-                </Link>
             </div>
+
+            {/* Subtle Border Overlay */}
+            <div className="absolute inset-0 border border-white/10 group-hover:border-white/30 rounded-2xl transition-colors duration-500 z-30 pointer-events-none" />
         </motion.div>
     )
 } 

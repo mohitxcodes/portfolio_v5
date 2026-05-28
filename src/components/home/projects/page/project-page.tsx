@@ -86,18 +86,25 @@ export default function ProjectPage() {
                         </Link>
 
                         {/* Desktop tabs - only visible on md and above */}
-                        <div className="hidden md:flex gap-2">
+                        <div className="hidden md:flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm relative">
                             {projectTabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`px-4 py-1 rounded-md cursor-pointer text-sm font-medium transition-all duration-300
+                                    className={`relative flex items-center px-4 py-1.5 rounded-full cursor-pointer text-xs font-semibold transition-colors duration-300 z-10
                                         ${activeTab === tab.id
-                                            ? `${tab.color} text-white`
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
+                                            ? 'text-gray-900'
+                                            : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10'}`}
                                 >
-                                    {tab.icon && <tab.icon className="inline-block mr-2" />}
-                                    {tab.label}
+                                    {activeTab === tab.id && (
+                                        <motion.div
+                                            layoutId="activeTabIndicator"
+                                            className="absolute inset-0 bg-white dark:bg-white rounded-full shadow-sm -z-10"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                    {tab.icon && <tab.icon className={`inline-block mr-1.5 relative z-10 ${activeTab === tab.id ? 'text-gray-900' : ''}`} />}
+                                    <span className="relative z-10">{tab.label}</span>
                                 </button>
                             ))}
                         </div>
@@ -108,38 +115,46 @@ export default function ProjectPage() {
                         bg-clip-text text-transparent">
                         My Projects
                     </h1>
-                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 truncate">
+                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 truncate">
                         A collection of my work in web development and AI...
                     </p>
 
                     {/* Mobile tabs - only visible on smaller screens */}
-                    <div
-                        ref={tabsContainerRef}
-                        className="md:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-hide"
-                        style={{
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none'
-                        }}
-                    >
-                        {projectTabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`px-3 py-1 rounded-md cursor-pointer text-xs font-medium transition-all duration-300
-                                    whitespace-nowrap flex-shrink-0
-                                    ${activeTab === tab.id
-                                        ? `${tab.color} text-white`
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'}`}
-                            >
-                                {tab.icon && <tab.icon className="inline-block mr-1" />}
-                                {tab.label}
-                            </button>
-                        ))}
+                    <div className="md:hidden flex justify-start pb-2">
+                        <div
+                            ref={tabsContainerRef}
+                            className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm overflow-x-auto scrollbar-hide w-max relative"
+                            style={{
+                                scrollbarWidth: 'none',
+                                msOverflowStyle: 'none'
+                            }}
+                        >
+                            {projectTabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`relative flex items-center px-4 py-1.5 rounded-full cursor-pointer text-xs font-semibold transition-colors duration-300 whitespace-nowrap flex-shrink-0 z-10
+                                        ${activeTab === tab.id
+                                            ? 'text-gray-900'
+                                            : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10'}`}
+                                >
+                                    {activeTab === tab.id && (
+                                        <motion.div
+                                            layoutId="activeTabIndicatorMobile"
+                                            className="absolute inset-0 bg-white dark:bg-white rounded-full shadow-sm -z-10"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                    {tab.icon && <tab.icon className={`inline-block mr-1.5 relative z-10 ${activeTab === tab.id ? 'text-gray-900' : ''}`} />}
+                                    <span className="relative z-10">{tab.label}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </motion.div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {filteredProjects.map((project, index) => (
                         <ProjectCard
                             key={index}

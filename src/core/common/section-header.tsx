@@ -7,7 +7,7 @@ import { ISectionHeader } from '@/types/common-types'
 export default function SectionHeader({ title, link, linkText }: ISectionHeader) {
     return (
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 sm:mb-8 md:mb-10">
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100
                         relative inline-block animate-fade-in">
                 {title}
                 <div className="absolute -bottom-1.5 xs:-bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300 
