@@ -5,7 +5,6 @@ import Header from '@/layouts/header/header'
 import Footer from "@/layouts/footer/footer";
 import ContentWrapper from "@/core/common/content-wrapper";
 import TopBar from "@/core/common/top-bar";
-import CursorEffect from "@/components/ui/cursor-effect";
 import InteractiveBackground from "@/components/ui/interactive-background";
 import SmoothScrolling from "@/components/common/smooth-scrolling";
 import FloatingContactButton from "@/components/common/floating-contact-button";
@@ -39,7 +38,6 @@ export default function RootLayout({
         <ScrollProgress />
         <SmoothScrolling />
         <InteractiveBackground />
-        <CursorEffect />
         <TopBar />
         <Header />
         <ContentWrapper>

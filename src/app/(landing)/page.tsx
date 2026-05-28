@@ -11,11 +11,11 @@ export default function LandingPage() {
         <div className="flex flex-col gap-4 w-full">
             <HeroSection />
             <GithubContribution />
-            <SkillsSection />
+            {/* <SkillsSection /> */}
             <ProjectsSection />
-            <ExperienceSection />
+            {/* <ExperienceSection /> */}
             <CertificationsSection />
-            <EducationSection />
+            {/* <EducationSection /> */}
             <ServicesSection />
         </div>
     );

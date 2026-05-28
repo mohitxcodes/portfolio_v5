@@ -14,6 +14,7 @@ import {
   LayoutGrid,
   History,
   Terminal,
+  Folder,
 } from "lucide-react";
 
 export default function Header() {
@@ -22,9 +23,10 @@ export default function Header() {
 
   const navItems = [
     { label: "Home", href: "/", icon: Home },
+    { label: "About", href: "/about", icon: User },
     { label: "Projects", href: "/projects", icon: LayoutGrid },
     { label: "Experience", href: "/experience", icon: History },
-    { label: "Portfolio", href: "/portfolio", icon: User },
+    { label: "Portfolio", href: "/portfolio", icon: Folder },
     { label: "Events", href: "/events", icon: Calendar },
     { label: "Contact", href: "/contact-us", icon: Mail },
   ];
