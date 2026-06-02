@@ -6,18 +6,45 @@ import Image from 'next/image';
 import { RiArrowRightLine } from 'react-icons/ri';
 import { FiFileText } from 'react-icons/fi';
 import BackgroundStyle from '../../../core/common/background';
-import { socialLinks } from '@/data/hero-data';
-import { skillCategories } from '@/data/skills-data';
+import SocialLinks from '@/components/common/social-links';
 import { motion } from 'framer-motion';
 import HeroFallback from '@/core/fallback/hero-fallback';
+import {
+  SiTypescript,
+  SiReact,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiReactquery,
+  SiSpringboot,
+  SiMysql,
+  SiPostgresql,
+  SiMongodb,
+  SiJavascript,
+  SiGithub,
+  SiPostman,
+  SiGit,
+  SiSpring,
+} from "react-icons/si";
+import { RiBarChartBoxLine, RiBrainLine } from "react-icons/ri";
 
-// Flatten the skills data for the marquee
-const allSkills = skillCategories.flatMap(category =>
-    category.skills.map((skill, index) => ({
-        name: skill,
-        icon: category.icons[index]
-    }))
-);
+const allSkills = [
+  { name: "React.js", icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#61DAFB" },
+  { name: "TanStack Query", icon: SiReactquery, color: "#FF4154" },
+  { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "REST APIs", icon: RiBarChartBoxLine, color: "#6366F1" },
+  { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F" },
+  { name: "JDBC", icon: RiBarChartBoxLine, color: "#F89820" },
+  { name: "Spring MVC", icon: SiSpring, color: "#6DB33F" },
+  { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "Java", icon: RiBrainLine, color: "#007396" },
+  { name: "Git & GitHub", icon: SiGithub, color: "#181717" },
+  { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+];
 
 export default function HeroSection() {
     const [loading, setLoading] = useState(true);
@@ -142,25 +169,10 @@ export default function HeroSection() {
 
                     {/* Links & CTA */}
                     <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-6 mt-4">
-                        <div className="flex items-center gap-5">
-                            {socialLinks.map((social, index) => (
-                                <motion.a
-                                    key={index}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ scale: 1.2, color: social.hoverText }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="text-gray-500 dark:text-gray-400 transition-all "
-                                    aria-label={social.label}
-                                >
-                                    <social.icon className="w-6 h-6" />
-                                </motion.a>
-                            ))}
-                        </div>
+                        <SocialLinks />
                         <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
                         <Link
-                            href="mailto:mohitxcodes@gmail.com"
+                            href="/contact-us"
                             className="text-gray-700 dark:text-gray-300 hover:text-light-accent dark:hover:text-white font-medium flex items-center gap-2 transition-colors duration-300"
                         >
                             Let&apos;s Talk <RiArrowRightLine />
@@ -211,7 +223,7 @@ export default function HeroSection() {
                         </div>
 
                         {/* Skills Infinite Scroll Marquee */}
-                        <div className="relative w-full max-w-[100vw] overflow-hidden flex py-4 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] -mx-4 sm:mx-0">
+                        <div className="relative w-full max-w-[100vw] overflow-hidden flex pt-14 pb-8 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] -mx-4 sm:mx-0">
                             <motion.div
                                 className="flex whitespace-nowrap gap-12 sm:gap-16 items-center px-6"
                                 animate={{ x: ["0%", "-50%"] }}
@@ -223,9 +235,34 @@ export default function HeroSection() {
                             >
                                 {/* Double the skills list to create an infinite loop effect */}
                                 {[...allSkills, ...allSkills].map((skill, index) => (
-                                    <div key={index} className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-light-accent dark:hover:text-white transition-colors duration-300 font-semibold text-lg lg:text-2xl">
-                                        <span className="text-3xl opacity-80">{skill.icon}</span>
-                                        <span>{skill.name}</span>
+                                    <div key={index} className="relative group flex flex-col items-center justify-center">
+                                        {/* Tooltip */}
+                                        <div className="absolute -top-12 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50 transform translate-y-2 group-hover:translate-y-0">
+                                            <div className="bg-white/95 dark:bg-[#111318]/95 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100 text-xs sm:text-sm font-bold tracking-wide px-3 py-1.5 rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.05)] whitespace-nowrap relative">
+                                                {skill.name}
+                                                {/* Tooltip Arrow */}
+                                                <div className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-white dark:bg-[#111318] border-b border-r border-gray-200 dark:border-gray-800 rotate-45" />
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Icon Container */}
+                                        <motion.div
+                                            whileHover={{ scale: 1.25, y: -5 }}
+                                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                            className="text-4xl sm:text-5xl text-gray-400 dark:text-gray-500 transition-colors duration-300 cursor-pointer"
+                                            onMouseEnter={(e) => {
+                                                const el = e.currentTarget;
+                                                el.style.color = skill.color;
+                                                el.style.filter = `drop-shadow(0 0 10px ${skill.color}80)`;
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                const el = e.currentTarget;
+                                                el.style.color = '';
+                                                el.style.filter = '';
+                                            }}
+                                        >
+                                            <skill.icon />
+                                        </motion.div>
                                     </div>
                                 ))}
                             </motion.div>

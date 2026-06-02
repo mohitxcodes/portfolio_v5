@@ -19,7 +19,7 @@ export default function ServicesSection() {
 
     return (
         <BackgroundStyle>
-            <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2">
+            <div className="max-w-7xl mx-auto px-3 sm:px-4">
                 <div className="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800/50 
                         border border-gray-200 dark:border-gray-700/50 
                         hover:border-gray-300 dark:hover:border-gray-600/50 

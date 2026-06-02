@@ -20,9 +20,8 @@ export const projectsData: Project[] = [
     liveUrl: "https://techpathfinder.msxcodes.in",
     technologies: [
       "Next.js",
-      "Node.js",
-      "MongoDB",
       "ExpressJs",
+      "MongoDB",
       "Tailwind",
       "Docker",
     ],
@@ -62,11 +61,10 @@ export const projectsData: Project[] = [
     liveUrl: "https://insights-ed.vercel.app",
     technologies: [
       "React",
-      "Socket.io",
-      "Gemini",
+      "Gemini API",
+      "MongoDB",
       "Express",
       "Redis",
-      "MongoDB",
     ],
     featured: true,
     challenges: [
@@ -94,7 +92,7 @@ export const projectsData: Project[] = [
 
   {
     id: "yashwantkumar",
-    title: "Yashwant Kumar - Portfolio",
+    title: "Portfolio Website",
     subtitle: "Web Application for his personal portfolio",
     projectType: "website",
     description:
@@ -105,11 +103,11 @@ export const projectsData: Project[] = [
     technologies: [
       "ReactJs",
       "TypeScript",
+      "Firebase",
       "Tailwind CSS",
       "Framer Motion",
-      "Firebase",
     ],
-    featured: false,
+    featured: true,
     challenges: [
       "Designing and implementing a visually appealing and responsive UI",
       "Integrating content from various sources (Academic papers, Research papers, etc.)",
@@ -199,7 +197,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "painal",
-    title: "Painal",
+    title: "Painal Village App",
     subtitle: "A Flutter app for village information.",
     projectType: "app",
     description:
@@ -208,7 +206,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/mohitxcodes/painal_app",
     liveUrl:
       "https://play.google.com/store/apps/details?id=com.mohitxcodes.painal",
-    technologies: ["Flutter", "Firebase", "Dart", "Cloudinary"],
+    technologies: ["React Native", "Supabase", "Expo", "postgresql"],
     featured: false,
     challenges: [
       "Designing and implementing a responsive and user-friendly UI",

@@ -30,7 +30,7 @@ export default function ProjectCard({ project, index, getProjectTypeIcon }: Proj
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500" />
 
             {/* Hover gradient: Darkens the bottom significantly for better readability on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10 opacity-20 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
             {/* Top Right Icon */}
             <div className="absolute top-3 right-3 z-20 bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/10">
@@ -38,11 +38,11 @@ export default function ProjectCard({ project, index, getProjectTypeIcon }: Proj
             </div>
 
             {/* Content Container (Bottom Aligned) */}
-            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col justify-end pointer-events-none">
+            <div className="absolute bottom-[-6px] left-0 w-full p-4 sm:p-4  z-20 flex flex-col justify-end pointer-events-none">
 
                 {/* Title (Always Visible) */}
-                <div className="mb-2">
-                    <h3 className="text-xl sm:text-lg font-bold text-white tracking-tight mb-0.5 drop-shadow-md line-clamp-1">
+                <div className="">
+                    <h3 className="text-sm sm:text-base font-bold text-white opacity-80  tracking-tight mb-0.5 drop-shadow-md line-clamp-1">
                         {project.title}
                     </h3>
                 </div>
