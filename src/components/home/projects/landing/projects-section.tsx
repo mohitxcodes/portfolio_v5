@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react'
 import { FaDesktop, FaMobileAlt, FaRobot } from 'react-icons/fa'
 import { projectsData } from '../data/projects-data'
 import SectionHeader from '@/core/common/section-header'
-import { motion } from 'framer-motion'
 import ProjectsFallback from '@/core/fallback/projects-fallback'
 import ProjectCard from '../page/components/ProjectCard'
 

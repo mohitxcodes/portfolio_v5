@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { FaExternalLinkAlt, FaAward } from 'react-icons/fa'
+import { FaExternalLinkAlt} from 'react-icons/fa'
 import { ICertification } from '@/types/certification-types'
 import { motion } from 'framer-motion'
 

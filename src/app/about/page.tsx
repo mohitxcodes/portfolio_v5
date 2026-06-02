@@ -32,7 +32,6 @@ import {
   SiJavascript,
   SiGithub,
   SiPostman,
-  SiGit,
   SiSpring,
 } from "react-icons/si";
 

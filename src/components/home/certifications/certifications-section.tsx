@@ -6,7 +6,6 @@ import { certifications } from './data/certifications-data'
 import CertificationsCard from './components/certifications-card'
 import SectionHeader from '@/core/common/section-header'
 import { ICertification } from '@/types/certification-types'
-import { motion } from 'framer-motion'
 import CertificationsFallback from '@/core/fallback/certifications-fallback'
 
 export default function CertificationsSection() {

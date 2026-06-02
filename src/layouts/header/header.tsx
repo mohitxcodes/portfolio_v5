@@ -7,13 +7,11 @@ import { IoClose } from "react-icons/io5";
 import { RiMenu3Line } from "react-icons/ri";
 import {
   Home,
-  Briefcase,
   User,
   Calendar,
   Mail,
   LayoutGrid,
   History,
-  Terminal,
   Folder,
 } from "lucide-react";
 
