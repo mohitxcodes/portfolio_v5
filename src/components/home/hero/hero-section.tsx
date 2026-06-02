@@ -168,7 +168,7 @@ export default function HeroSection() {
                     </motion.p>
 
                     {/* Links & CTA */}
-                    <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-6 mt-4">
+                    <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mt-4">
                         <SocialLinks />
                         <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
                         <Link

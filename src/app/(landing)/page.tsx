@@ -8,7 +8,7 @@ import ServicesSection from "@/components/home/services/services-section";
 import GithubContribution from "@/components/home/github/github-contribution";
 export default function LandingPage() {
     return (
-        <div className="flex flex-col gap- w-full">
+        <div className="flex flex-col gap-4 w-full">
             <HeroSection />
             <GithubContribution />
             {/* <SkillsSection /> */}

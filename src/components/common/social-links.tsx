@@ -11,7 +11,7 @@ interface SocialLinksProps {
 
 export default function SocialLinks({ iconSize = 'w-6 h-6', gap = 'gap-5' }: SocialLinksProps) {
     return (
-        <div className={`flex items-center ${gap}`}>
+        <div className={`flex flex-wrap justify-center items-center ${gap}`}>
             {socialLinks.map((social, index) => (
                 <div key={index} className="relative group flex flex-col items-center justify-center">
                     {/* Tooltip */}

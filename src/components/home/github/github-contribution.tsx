@@ -67,7 +67,7 @@ export default function GitHubContributions() {
     }
 
     return (
-        <BackgroundStyle className="p-6 md:p-8">
+        <BackgroundStyle className="sm:p-6 md:p-8">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                 <div className="flex items-center gap-4">
