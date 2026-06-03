@@ -1,11 +1,13 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FaBriefcase, FaCertificate, FaArrowLeft } from 'react-icons/fa'
+import { FaBriefcase, FaCertificate, FaArrowLeft, FaCalendarCheck, FaCalendarAlt, FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa'
 import BackgroundStyle from '@/core/common/background'
 import Link from 'next/link'
+import Image from 'next/image'
 import { experiences } from '../data/exp-data'
 import { certifications } from '../../certifications/data/certifications-data'
+import { events } from '@/data/event-data'
 import CertificationsCard from '../../certifications/components/certifications-card'
 import ExperienceCard from '../components/exp-card'
 import { IExperience } from '@/types/exp-types'
@@ -56,7 +58,8 @@ export default function ExperiencePage() {
                             <div className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm relative">
                                 {[
                                     { id: 'experience', label: 'Experience', icon: FaBriefcase },
-                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate }
+                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate },
+                                    { id: 'events', label: 'Events & Achievements', icon: FaCalendarCheck }
                                 ].map((tab) => (
                                     <button
                                         key={tab.id}
@@ -96,7 +99,8 @@ export default function ExperiencePage() {
                             <div className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-white/5 backdrop-blur-md rounded-full border border-gray-200/80 dark:border-white/10 shadow-sm relative w-max">
                                 {[
                                     { id: 'experience', label: 'Experience', icon: FaBriefcase },
-                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate }
+                                    { id: 'certifications', label: 'Certifications', icon: FaCertificate },
+                                    { id: 'events', label: 'Events & Achievements', icon: FaCalendarCheck }
                                 ].map((tab) => (
                                     <button
                                         key={tab.id}
@@ -125,7 +129,7 @@ export default function ExperiencePage() {
                 {/* Content */}
                 <div className="relative">
                     {/* Timeline Line */}
-                    {activeTab === 'experience' && (
+                    {(activeTab === 'experience' || activeTab === 'events') && (
                         <Timeline />
                     )}
 
@@ -141,6 +145,124 @@ export default function ExperiencePage() {
                             <CertificationsCard key={index} cert={cert} index={index} />
                         ))}
                     </div>
+
+                    {/* Events */}
+                    {activeTab === 'events' && (
+                        <div className="flex flex-col gap-8 w-full">
+                            {/* Events List */}
+                            <div className="space-y-12">
+                                {events.map((event, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                        className="relative pl-12 sm:pl-16"
+                                    >
+                                        {/* Timeline Dot */}
+                                        <div className="absolute left-3 sm:left-5 top-1.5">
+                                            <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-500" />
+                                        </div>
+
+                                        <div className="bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden
+                                            border border-gray-200 dark:border-gray-700/50 
+                                            hover:border-gray-300 dark:hover:border-gray-600/50 
+                                            transition-all duration-300 hover:shadow-xl">
+
+                                            {/* Event Images */}
+                                            {event.images && event.images.length > 0 && (
+                                                <div className="relative h-40 sm:h-48 md:h-64">
+                                                    <div className="absolute inset-0 flex">
+                                                        {event.images.map((image, idx) => (
+                                                            <div key={idx} className="relative flex-1">
+                                                                <Image
+                                                                    src={image}
+                                                                    alt={`${event.title} - Image ${idx + 1}`}
+                                                                    fill
+                                                                    className="object-cover"
+                                                                />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="p-4 sm:p-6">
+                                                {/* Event Header */}
+                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+                                                    <div>
+                                                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-100">
+                                                            {event.title}
+                                                        </h3>
+                                                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                                                            Hosted by {event.host}
+                                                        </p>
+                                                    </div>
+                                                    {event.certificateUrl ? (
+                                                        <a
+                                                            href={event.certificateUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 
+                                                                transition-colors duration-300 flex items-center gap-1.5 text-sm"
+                                                            title="View Certificate"
+                                                        >
+                                                            <span className="text-xs sm:text-sm">Certificate</span>
+                                                            <FaExternalLinkAlt size={12} />
+                                                        </a>
+                                                    ) : event.link ? (
+                                                        <a
+                                                            href={event.link}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 
+                                                                transition-colors duration-300"
+                                                        >
+                                                            <FaExternalLinkAlt size={14} />
+                                                        </a>
+                                                    ) : null}
+                                                </div>
+
+                                                {/* Event Details */}
+                                                <div className="flex flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-6">
+                                                    <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                                                        <FaCalendarAlt size={12} className="sm:text-base" />
+                                                        <span>{event.date}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                                                        <FaMapMarkerAlt size={12} className="sm:text-base" />
+                                                        <span>{event.location}</span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Overview */}
+                                                <div className="mb-4 sm:mb-6">
+                                                    <h4 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 sm:mb-2">
+                                                        Overview
+                                                    </h4>
+                                                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                                                        {event.overview}
+                                                    </p>
+                                                </div>
+
+                                                {/* Learning Outcomes */}
+                                                <div className="mb-4 sm:mb-6">
+                                                    <h4 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 sm:mb-2">
+                                                        Learning Outcomes
+                                                    </h4>
+                                                    <ul className="list-disc list-inside space-y-0.5 sm:space-y-1 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                                                        {event.learningOutcomes.map((outcome, idx) => (
+                                                            <li key={idx}>{outcome}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                 </div>
             </div>

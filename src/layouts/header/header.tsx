@@ -25,7 +25,6 @@ export default function Header() {
     { label: "Projects", href: "/projects", icon: LayoutGrid },
     { label: "Experience", href: "/experience", icon: History },
     { label: "Portfolio", href: "/portfolio", icon: Folder },
-    { label: "Events", href: "/events", icon: Calendar },
     { label: "Contact", href: "/contact-us", icon: Mail },
   ];
 

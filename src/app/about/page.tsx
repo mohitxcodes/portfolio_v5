@@ -13,6 +13,8 @@ import {
   RiTrophyFill,
   RiBarChartBoxLine,
   RiBrainLine,
+  RiRobot2Fill,
+  RiCollageFill,
 } from "react-icons/ri";
 import { FiFileText, } from "react-icons/fi";
 import BackgroundStyle from "@/core/common/background";
@@ -34,6 +36,9 @@ import {
   SiPostman,
   SiSpring,
 } from "react-icons/si";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { Graduate } from "next/font/google";
+import { FaGraduationCap } from "react-icons/fa";
 
 export default function AboutPage() {
   const containerVariants = {
@@ -81,9 +86,9 @@ export default function AboutPage() {
   ];
 
   const achievements = [
-    { title: "Top 10 Innovators in Tech", icon: RiTrophyFill },
-    { title: "Hackathon Winner 2023", icon: RiAwardFill },
-    { title: "Published Technical Writer", icon: FiFileText },
+    { title: "Built AI-Powered Applications", icon: RiRobot2Fill},
+    { title: "500+ App Downloads On PlayStore", icon: IoLogoGooglePlaystore },
+    { title: "Lanuch ByteBoxCodes.com Website", icon: FiFileText },
   ];
 
   return (
@@ -98,9 +103,9 @@ export default function AboutPage() {
           {/* Left Column - Sidebar */}
           <motion.div
             variants={itemVariants}
-            className="w-full md:w-1/3 flex flex-col space-y-8 pt-6"
+            className="w-full md:w-1/3 flex flex-col space-y-6 pt-6"
           >
-            <div className="space-y-4 ">
+            <div className="space-y-4">
               <div className="relative inline-block mx-auto md:mx-0 md:pl-8">
                 <motion.div
                   drag
@@ -132,7 +137,7 @@ export default function AboutPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative px-5 py-2 text-sm font-medium 
-                        bg-gray-200/50 dark:bg-gray-800/50 text-gray-900 dark:text-white
+                        bg-gray-200/50 dark:bg-black/80 text-gray-900 dark:text-white
                         rounded-xl border border-gray-200 dark:border-gray-700
                         overflow-hidden
                         shadow-lg hover:shadow-xl
@@ -152,25 +157,46 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="space-y-4 text-sm text-gray-600 dark:text-gray-300 md:pl-8">
+            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300 md:pl-8">
               <div className="flex items-center gap-3">
-                <RiVerifiedBadgeFill className="text-blue-500 w-5 h-5" />
-                <span className="font-medium">Full Stack Developer</span>
+                <RiVerifiedBadgeFill className="w-5 h-5 text-gray-400" />
+                <span className="font-medium ">Full Stack Developer</span>
               </div>
               <div className="flex items-center gap-3">
-                <RiCalendarEventFill className="text-emerald-500 w-5 h-5" />
-                <span>3+ Years Experience</span>
+                <FaGraduationCap className="w-5 h-5 text-gray-400" />
+                <span className="font-medium ">CU CSE'28 Student</span>
               </div>
               <div className="flex items-center gap-3">
-                <RiMapPin2Fill className="text-red-500 w-5 h-5" />
-                <span>Based in Bihar, India 🇮🇳</span>
+                <RiMapPin2Fill className="w-5 h-5 text-gray-400" />
+                <span className="font-medium ">Based in India 🇮🇳</span>
               </div>
+            </div>
+
+            {/* Current Tech Stack */}
+            <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-800 md:pl-8">
+              <h3 className="font-semibold text-gray-900 dark:text-white">
+                Current Stack
+              </h3>
+              <div className="group flex items-center gap-2.5 w-fit py-2  rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600">
+                <div className="flex -space-x-2">
+                  <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0f1115] flex items-center justify-center border border-gray-200 dark:border-gray-700 z-10 shadow-sm">
+                    <SiReact className="w-4 h-4 text-[#61DAFB] group-hover:animate-spin-slow" />
+                  </div>
+                  <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0f1115] flex items-center justify-center border border-gray-200 dark:border-gray-700 z-0 shadow-sm">
+                    <SiSpringboot className="w-4 h-4 text-[#6DB33F] group-hover:scale-110 transition-transform" />
+                  </div>
+                </div>
+                <span className="text-gray-800 dark:text-gray-200 tracking-wide">React.js + Java SpringBoot</span>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[280px]">
+                Building highly scalable and robust full-stack applications by combining dynamic React frontends with enterprise-grade Java backends.
+              </p>
             </div>
 
             {/* Recent Achievements */}
             <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800 md:pl-8">
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                Recent Achievements
+                Recent Milestones
               </h3>
               <ul className="space-y-3">
                 {achievements.map((item, idx) => (
