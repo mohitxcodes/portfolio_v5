@@ -8,13 +8,9 @@ import {
   RiVerifiedBadgeFill,
   RiMapPin2Fill,
   RiMailSendLine,
-  RiCalendarEventFill,
-  RiAwardFill,
-  RiTrophyFill,
   RiBarChartBoxLine,
   RiBrainLine,
   RiRobot2Fill,
-  RiCollageFill,
 } from "react-icons/ri";
 import { FiFileText, } from "react-icons/fi";
 import BackgroundStyle from "@/core/common/background";
@@ -37,7 +33,6 @@ import {
   SiSpring,
 } from "react-icons/si";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
-import { Graduate } from "next/font/google";
 import { FaGraduationCap } from "react-icons/fa";
 
 export default function AboutPage() {
@@ -164,7 +159,7 @@ export default function AboutPage() {
               </div>
               <div className="flex items-center gap-3">
                 <FaGraduationCap className="w-5 h-5 text-gray-400" />
-                <span className="font-medium ">CU CSE'28 Student</span>
+                <span className="font-medium ">CU CSE&apos;28 Student</span>
               </div>
               <div className="flex items-center gap-3">
                 <RiMapPin2Fill className="w-5 h-5 text-gray-400" />

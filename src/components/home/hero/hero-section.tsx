@@ -49,7 +49,6 @@ export default function HeroSection() {
     const [loading, setLoading] = useState(true);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isImageLoading, setIsImageLoading] = useState(false);
-    console.log(isImageLoading);
 
     // Avatar images - replace these with your actual image paths
     const avatarImages = [
@@ -75,7 +74,7 @@ export default function HeroSection() {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, );
+    }, [isImageLoading]);
 
     if (loading) return <HeroFallback />;
 
