@@ -7,6 +7,7 @@ import { RiArrowRightLine } from 'react-icons/ri';
 import { FiFileText } from 'react-icons/fi';
 import BackgroundStyle from '../../../core/common/background';
 import SocialLinks from '@/components/common/social-links';
+import { generalSocialLinks, dsaLinks } from '@/data/hero-data';
 import { motion } from 'framer-motion';
 import HeroFallback from '@/core/fallback/hero-fallback';
 import {
@@ -167,7 +168,9 @@ export default function HeroSection() {
 
                     {/* Links & CTA */}
                     <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mt-4">
-                        <SocialLinks />
+                        <SocialLinks items={generalSocialLinks} />
+                        <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
+                        <SocialLinks items={dsaLinks} />
                         <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
                         <Link
                             href="/contact-us"

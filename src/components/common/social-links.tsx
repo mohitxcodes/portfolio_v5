@@ -2,17 +2,18 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { socialLinks } from '@/data/hero-data';
+import { socialLinks, SocialLinkItem } from '@/data/hero-data';
 
 interface SocialLinksProps {
+    items?: SocialLinkItem[];
     iconSize?: string;
     gap?: string;
 }
 
-export default function SocialLinks({ iconSize = 'w-6 h-6', gap = 'gap-5' }: SocialLinksProps) {
+export default function SocialLinks({ items = socialLinks, iconSize = 'w-6 h-6', gap = 'gap-5' }: SocialLinksProps) {
     return (
         <div className={`flex flex-wrap justify-center items-center ${gap}`}>
-            {socialLinks.map((social, index) => (
+            {items.map((social, index) => (
                 <div key={index} className="relative group flex flex-col items-center justify-center">
                     {/* Tooltip */}
                     <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50 transform translate-y-2 group-hover:translate-y-0">
