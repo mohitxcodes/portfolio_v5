@@ -49,7 +49,6 @@ export default function HeroSection() {
     const [loading, setLoading] = useState(true);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isImageLoading, setIsImageLoading] = useState(false);
-
     // Avatar images - replace these with your actual image paths
     const avatarImages = [
         '/profile/mohit03.jpg', // Replace with third image
